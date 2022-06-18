@@ -37,15 +37,18 @@ const Card = ({ cardObject, posts, index }) => {
         onClick={() => handlePopUp(cardObject)}
       >
         <div className="custom_card_body">
-          <img
-            className={
-              index + 1 === posts.length
-                ? "custom_card_img overlay"
-                : "custom_card_img"
-            }
-            src={cardObject?.thumbnail?.large}
-            alt=""
-          />
+          <div class="container">
+            <img
+              className="custom_card_img image"
+              src={cardObject?.thumbnail?.large}
+              alt=""
+            />
+            {index + 1 === posts.length && (
+              <div class="overlay">
+                <h5 className="show_more"> show More</h5>
+              </div>
+            )}
+          </div>
           <div className="custom_dots">
             <div className="dot_dodger"></div>
             <div className="dot_yellow"></div>
