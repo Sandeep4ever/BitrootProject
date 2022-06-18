@@ -11,7 +11,6 @@ function App() {
       const response = await axios(
         "https://my-json-server.typicode.com/Codeinwp/front-end-internship-api/posts"
       );
-      console.log(response);
       if (response && response.data && response.data.length > 0) {
         setPosts(response.data);
       }
