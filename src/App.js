@@ -1,23 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import "./App.css";
+import Card from "./Components/Card";
+import axios from "axios";
 
 function App() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const response = await axios(
+        "https://my-json-server.typicode.com/Codeinwp/front-end-internship-api/posts"
+      );
+      console.log(response);
+      if (response && response.data && response.data.length > 0) {
+        setPosts(response.data);
+      }
+    };
+    getData();
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="main_container">
+        <div className="custom_row">
+          <div className="column_50_percent">
+            {posts.map((post, index) => {
+              return (
+                <Card
+                  key={index}
+                  cardObject={post}
+                  posts={posts}
+                  index={index}
+                />
+              );
+            })}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
